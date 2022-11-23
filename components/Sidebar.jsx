@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { CiUser } from "react-icons/ci";
 import { AiOutlineIdcard } from "react-icons/ai";
+import { MdLocalPharmacy } from "react-icons/md";
 export default function Sidebar() {
   return (
     <>
@@ -71,6 +72,24 @@ export default function Sidebar() {
                   >
                     <CiUser className="text-white text-2xl" />
                     <span className="text-gray-100">Patients</span>
+                  </Link>
+                </li>
+                <li className="rounded-sm">
+                  <Link
+                    href="/Doctors/newDoctor"
+                    className="flex items-center p-2 space-x-3 rounded-md"
+                  >
+                    <CiUser className="text-white text-2xl" />
+                    <span className="text-gray-100">Doctors</span>
+                  </Link>
+                </li>
+                <li className="rounded-sm">
+                  <Link
+                    href="/Pharmacy/newPharmacy"
+                    className="flex items-center p-2 space-x-3 rounded-md"
+                  >
+                    <MdLocalPharmacy className="text-white text-2xl" />
+                    <span className="text-gray-100">Pharmacy</span>
                   </Link>
                 </li>
                 <li className="rounded-sm">

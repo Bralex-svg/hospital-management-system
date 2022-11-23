@@ -1,16 +1,16 @@
 import { CiUser } from "react-icons/ci";
 
-export default function Patient() {
+export default function Doctor() {
   return (
     <>
       <div>
         <div className="bg-gray-300  -mt-[45%] ml-[18%] w-[82%] h-[3rem]">
           <h1 className="font-bold ml-[7%] text-2xl relative top-[20%] text-[#10204B]">
-            NEW PATIENT FORM...
+            Doctors Section
           </h1>
         </div>
         <h2 className="ml-[20%] text-xl translate-y-[50%] ">
-          Patient Personal Information
+          Doctors Personal Information
         </h2>
         <div className="w-[15%] ml-[30%] h-[10rem] bg-gray-400 mt-[4%]">
           {" "}
