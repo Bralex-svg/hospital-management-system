@@ -45,8 +45,8 @@ export default function Sidebar() {
             <div className="flex-1">
               <ul className="pt-2 pb-4 space-y-1 text-sm">
                 <li className="rounded-sm">
-                  <a
-                    href="#"
+                  <Link
+                    href="/dashboard/admin"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <svg
@@ -64,7 +64,7 @@ export default function Sidebar() {
                       />
                     </svg>
                     <span className="text-gray-100">My Profile</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="rounded-sm">
                   <Link

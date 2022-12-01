@@ -5,9 +5,9 @@ export default function Admin() {
     <>
       <div>
         <Sidebar />
-        {/* <h1 className="text-5xl font-bold mt-[10%] ml-[30%]">
+        <h1 className="text-5xl font-bold -mt-[40%] ml-[40%]">
           UNDER CONSTRUCTION
-        </h1> */}
+        </h1>
       </div>
     </>
   );
