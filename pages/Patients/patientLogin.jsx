@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { Link } from "next/link";
 export default function Login() {
   const router = useRouter();
 
@@ -13,7 +14,7 @@ export default function Login() {
 
   return (
     <div className="-mt-[2%] relative flex flex-col justify-center min-h-screen overflow-hidden">
-      <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring ring-2 ring-purple-600 lg:max-w-xl">
+      <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-purple-600 lg:max-w-xl">
         <h1 className="text-3xl font-semibold text-center text-[#10204B] underline uppercase decoration-wavy">
           Patient Sign In
         </h1>
@@ -57,9 +58,14 @@ export default function Login() {
 
         <p className="mt-8 text-xs font-light text-center text-gray-700">
           Don't have an account?
-          <a href="#" className="font-medium text-purple-600 hover:underline">
+          <Link>
+            <li className="font-medium text-purple-600 hover:underline">
+              Sign up
+            </li>
+          </Link>
+          {/* <a href="#" className="font-medium text-purple-600 hover:underline">
             Sign up
-          </a>
+          </a> */}
         </p>
       </div>
     </div>
