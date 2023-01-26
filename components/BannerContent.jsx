@@ -17,10 +17,10 @@ const BannerContent = () => {
   };
   return (
     <>
-      <div className="w-full -mt-[90%] md:-mt-[40%]  flex flex-col justify-between">
+      <div className="w-full -mt-[170%] md:-mt-[40%]  flex flex-col justify-between">
         <div className="grid md:grid-cols-2 w-full m-auto">
           {/* Content */}
-          <div className="flex flex-col justify-center md:items-start w-full px-2 ">
+          <div className="flex flex-col  justify-center md:items-start w-full px-2 ">
             <h1 className="text-3xl  md:ml-[15%] md:text-5xl md:w-[90%] md:text-start text-center   py-3 w-[100%] xl font-bold text-white ">
               A Decentralized software for health care{" "}
               <Typed

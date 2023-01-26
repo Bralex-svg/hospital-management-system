@@ -26,33 +26,43 @@ const Navbar = () => {
         </Link>
 
         <ul className="hidden w-full ml-[50%] md:flex ">
-          <li className="p-4">HOME</li>
-          <li className="p-4">ABOUT US</li>
+          <a href="/">
+            <li className="p-4">HOME</li>
+          </a>
+          <a href="Patients/patientLogin">
+            <li className="p-4">PATEINT</li>
+          </a>
 
           <button
             onClick={push}
             className="bg-[#10204B]  text-white ml-8 rounded-md font-medium w-[180px]  mx-auto my-2 px-4 py-3"
           >
-            Login
+            Admin Login
           </button>
         </ul>
         <div onClick={handleNav} className="block md:hidden">
-          {/* {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />} */}
+          {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
         </div>
         <div
           className={
             nav
-              ? "fixed top-0 left-0 bg-[#F73D27]  w-[60%] h-full border-r border-r-gray-900 ease-in-out duration-500"
-              : "fixed left-[-100%]"
+              ? "fixed top-20 left-0 z-9999  bg-[#fff]  w-[60%] h-full border-r border-r-gray-900 ease-in-out duration-500"
+              : "fixed left-[-100%] z-9999 bg-[#fff]"
           }
         >
-          <h1 className="w-full font-bold text-3xl m-4 text-white">KFC</h1>
+          {/* <h1 className="w-full font-bold text-3xl m-4 text-white">
+            EBI HEALTH
+          </h1> */}
 
           <ul className=" md:hidden p-4 uppercase">
-            <li className="p-6 border-b border-gray-600 ">ABOUT US</li>
-
-            <button className="bg-[#ffffff]  text-black mt-7 ml-2 rounded-md font-medium w-[180px]  mx-auto my-2 px-4 py-3">
-              Contact
+            <li className="p-6 text-black border-b border-gray-600 ">HOME</li>
+            <a href="Patients/patientLogin">
+              <li className="p-6 text-black border-b border-gray-600 ">
+                Patient
+              </li>
+            </a>
+            <button className="bg-black  text-white mt-7 ml-2 rounded-md font-medium w-[180px]  mx-auto my-2 px-4 py-3">
+              ADMIN LOGIN
             </button>
           </ul>
         </div>
