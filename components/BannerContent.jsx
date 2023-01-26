@@ -6,7 +6,7 @@ import Clock from "../public/images/clock.png";
 import Calling from "../public/images/calling.png";
 import Location from "../public/images/location.png";
 import { useRouter } from "next/router";
-import Typed from "react-typed";
+// import Typed from "react-typed";
 
 const BannerContent = () => {
   const router = useRouter();
@@ -23,12 +23,12 @@ const BannerContent = () => {
           <div className="flex flex-col  justify-center md:items-start w-full px-2 ">
             <h1 className="text-3xl  md:ml-[15%] md:text-5xl md:w-[90%] md:text-start text-center   py-3 w-[100%] xl font-bold text-white ">
               A Decentralized software for health care{" "}
-              <Typed
+              {/* <Typed
                 strings={[" Management", "Record Keeping"]}
                 typeSpeed={150}
                 backSpeed={150}
                 loop
-              />{" "}
+              />{" "} */}
             </h1>
 
             <p className=" md:w-[60%] -translate-y-[20%] sm:translate-y-[0] md:ml-[15%]   py-3 text-white ">
