@@ -26,12 +26,12 @@ const Navbar = () => {
         </Link>
 
         <ul className="hidden w-full ml-[50%] md:flex ">
-          <a href="/">
+          <Link href="/">
             <li className="p-4">HOME</li>
-          </a>
-          <a href="Patients/patientLogin">
+          </Link>
+          <Link href="Patients/patientLogin">
             <li className="p-4">PATEINT</li>
-          </a>
+          </Link>
 
           <button
             onClick={push}
