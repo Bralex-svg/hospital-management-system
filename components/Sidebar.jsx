@@ -71,13 +71,13 @@ export default function Sidebar() {
                 </li>
 
                 <li className="rounded-sm">
-                  <a
+                  <Link
                     href="/Patients/medicalInfo"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <AiOutlineIdcard className="text-white text-2xl" />
                     <span className="text-gray-100">OPD</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="rounded-sm">
                   <Link
