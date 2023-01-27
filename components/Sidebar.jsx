@@ -69,6 +69,16 @@ export default function Sidebar() {
                     <span className="text-gray-100">My Profile</span>
                   </Link>
                 </li>
+
+                <li className="rounded-sm">
+                  <a
+                    href="/Patients/medicalInfo"
+                    className="flex items-center p-2 space-x-3 rounded-md"
+                  >
+                    <AiOutlineIdcard className="text-white text-2xl" />
+                    <span className="text-gray-100">OPD</span>
+                  </a>
+                </li>
                 <li className="rounded-sm">
                   <Link
                     href="/Patients/newPatient"
@@ -114,6 +124,17 @@ export default function Sidebar() {
                     <span className="text-gray-100">ID CARDS</span>
                   </a>
                 </li>
+
+                <li className="rounded-sm">
+                  <a
+                    href="#"
+                    className="flex items-center p-2 space-x-3 rounded-md"
+                  >
+                    <AiOutlineIdcard className="text-white text-2xl" />
+                    <span className="text-gray-100">ID CARDS</span>
+                  </a>
+                </li>
+
                 <li className="rounded-sm">
                   <a
                     href="#"

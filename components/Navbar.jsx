@@ -29,9 +29,9 @@ const Navbar = () => {
           <Link href="/">
             <li className="p-4">HOME</li>
           </Link>
-          <Link href="Patients/patientLogin">
+          {/* <Link href="Patients/patientLogin">
             <li className="p-4">PATEINT</li>
-          </Link>
+          </Link> */}
 
           <button
             onClick={push}

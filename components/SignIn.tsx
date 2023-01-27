@@ -29,9 +29,9 @@ export default function SignIn() {
     }
   }
 
-  // const push = () => {
-  //   router.push("/dashboard/admin");
-  // };
+  const push = () => {
+    router.push("/dashboard/admin");
+  };
 
   useEffect(() => {
     if (user) {
@@ -49,6 +49,18 @@ export default function SignIn() {
           className="max-w-[550px] absolute top-[40%] ml-[70%]  "
         >
           <div className="mb-3 xl:w-96">
+            <select
+              // id="countries"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
+                   
+
+                focus:border-blue-500 block w-[70%] ml-[8%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option selected>Choose your hospital</option>
+              <option value="NH1">War Memorial</option>
+              <option value="VCR">Ckt Clinic</option>
+              <option value="NH2">Tamale TH</option>
+            </select>
             <label
               htmlFor="exampleFormControlInput1"
               className="form-label text-2xl ml-[7%] inline-block mb-2 text-white"
@@ -118,8 +130,8 @@ export default function SignIn() {
             <p className=" text-white ml-[30%]">Forgot Passwprd</p>
           </div>
           <button
-            onClick={handleLogin}
-            // onClick={push}
+            // onClick={handleLogin}
+            onClick={push}
             className="bg-[#ffffff] text-[#10204B] my-[15%] ml-[35%] font-medium rounded-[20px] py-2 px-8 "
           >
             Sign In

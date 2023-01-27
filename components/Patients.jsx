@@ -5,7 +5,7 @@ export default function Patient() {
 
   const push = (e) => {
     e.preventDefault();
-    router.push("patientRecord");
+    router.push("medicalInfo");
   };
   return (
     <>
