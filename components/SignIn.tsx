@@ -29,9 +29,9 @@ export default function SignIn() {
     }
   }
 
-  const push = () => {
-    router.push("/dashboard/admin");
-  };
+  // const push = () => {
+  //   router.push("/dashboard/admin");
+  // };
 
   useEffect(() => {
     if (user) {
@@ -130,8 +130,8 @@ export default function SignIn() {
             <p className=" text-white ml-[30%]">Forgot Passwprd</p>
           </div>
           <button
-            // onClick={handleLogin}
-            onClick={push}
+            onClick={handleLogin}
+            // onClick={push}
             className="bg-[#ffffff] text-[#10204B] my-[15%] ml-[35%] font-medium rounded-[20px] py-2 px-8 "
           >
             Sign In
