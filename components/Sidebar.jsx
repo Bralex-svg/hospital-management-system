@@ -76,7 +76,7 @@ export default function Sidebar() {
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <AiOutlineIdcard className="text-white text-2xl" />
-                    <span className="text-gray-100">OPD</span>
+                    <span className="text-gray-100">Out Patient Dept</span>
                   </Link>
                 </li>
                 <li className="rounded-sm">
