@@ -1,11 +1,13 @@
-import React, { useRouter } from "next/router";
-export default function medicalInfo() {
-  const router = useRouter();
+import React from "react";
+import { useRouter } from "next/router";
 
+const medicalInfo = () => {
+  const router = useRouter();
   const push = (e) => {
     e.preventDefault();
     router.push("patientRecord");
   };
+
   return (
     <>
       <div className="ml-[20%] mt-[10%]">
@@ -162,4 +164,6 @@ export default function medicalInfo() {
       </div>
     </>
   );
-}
+};
+
+export default medicalInfo;
