@@ -4,140 +4,104 @@ import { useEffect, useState } from "react";
 import ResponseModel from "../models/ResponseModel";
 import ApiRoutes from "../routes/ApiRoutes";
 import controller from "../controller";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { AuthThunk } from "../functions";
+import PrimaryButton from "./PrimaryButton";
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
+import InputGroup from "./InputGroup";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 export default function SignIn() {
   const router = useRouter();
-
-  const [user, setUser] = useState<UserModel | null>(null);
+  const { user } = useAppSelector((state) => state.UserReducer);
+  const [isPassword, setIsPassword] = useState<boolean>(true);
+  const { error } = useAppSelector((state) => state.ResponseReducer);
+  const dispatch = useAppDispatch();
   const [info, setInfo] = useState<UserLoginDto>({
     username: "",
     password: "",
   });
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
 
   async function handleLogin() {
-    try {
-      const res = await controller<ResponseModel<UserModel>>({
-        data: info,
-        url: ApiRoutes.auth.loging,
-      });
-      setUser(res.data);
-    } catch (error) {
-      console.log(error);
-      alert(error);
-    }
+    dispatch(
+      AuthThunk({ data: info, url: ApiRoutes.auth.loging, method: "post" })
+    );
   }
 
-  // const push = () => {
-  //   router.push("/dashboard/admin");
-  // };
-
   useEffect(() => {
-    if (user) {
-      console.log(user);
-      //navigate
+    if (user && user.authenticated) {
       router.push("/dashboard/admin");
+    } else if (user && !user.authenticated) {
+      router.push("/auth/verify");
     }
   }, [user]);
 
   return (
-    <>
-      <div className="z-100">
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          className="max-w-[550px] absolute top-[40%] ml-[70%]  "
+    <Stack
+      alignItems="center"
+      justifyContent="cente"
+      marginTop="-50px"
+      width="100%"
+      height="100%"
+      spacing={2}
+    >
+      <Stack
+        width="450px"
+        padding={3}
+        boxShadow={(theme) => `5px 5px 5px ${theme.palette.action.hover}`}
+        borderRadius={(theme) => theme.spacing(0.5)}
+        bgcolor={(theme) => theme.palette.background.paper}
+        spacing={1.5}
+        minHeight="200px"
+      >
+        <InputGroup
+          handleChange={(e) => setInfo({ ...info, username: e.target.value })}
+          label="PhoneNumber"
+          placeholder="enter phone number"
+        />
+        <InputGroup
+          handleChange={(e) => setInfo({ ...info, password: e.target.value })}
+          label="Password"
+          placeholder="enter password"
+          props={{
+            type: isPassword ? "password" : "text",
+            InputProps: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setIsPassword(!isPassword)}
+                    size="small"
+                  >
+                    {isPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
+        <PrimaryButton title="Sign In" handleClick={handleLogin} />
+        <Button
+          onClick={() => router.push("/auth/signup")}
+          style={{ textTransform: "none" }}
+          variant="outlined"
+          size="small"
+          fullWidth
+          color="primary"
         >
-          <div className="mb-3 xl:w-96">
-            <select
-              // id="countries"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                   
-
-                focus:border-blue-500 block w-[70%] ml-[8%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option selected>Choose your hospital</option>
-              <option value="NH1">War Memorial</option>
-              <option value="VCR">Ckt Clinic</option>
-              <option value="NH2">Tamale TH</option>
-            </select>
-            <label
-              htmlFor="exampleFormControlInput1"
-              className="form-label text-2xl ml-[7%] inline-block mb-2 text-white"
-            >
-              ID
-            </label>
-            <input
-              type="text"
-              className="
-              
-        form-control
-        block
-        w-[70%]
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-      bg-[#1023b200] 
-        border border-solid border-white
-        rounded-[20px]
-        transition
-        ease-in-out
-        ml-[8%]
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      "
-              id="exampleFormControlInput1"
-              placeholder="Enter role id"
-              value={info.username}
-              onChange={(e) => setInfo({ ...info, username: e.target.value })}
-            />
-          </div>
-          <div className="mb-3 xl:w-96">
-            <label
-              htmlFor="exampleFormControlInput1"
-              className="form-label text-2xl ml-[7%] inline-block mb-2 text-white"
-            >
-              PASSWORD:
-            </label>
-            <input
-              type="password"
-              className="
-        form-control
-     w-[70%]
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
- 
-        bg-[#1023b200] 
-        border border-solid border-white
-        rounded-[20px]
-        transition
-        ease-in-out
-            ml-[8%]
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      "
-              id="exampleFormControlInput1"
-              placeholder="Enter password"
-              value={info.password}
-              onChange={(e) => setInfo({ ...info, password: e.target.value })}
-            />
-          </div>
-
-          <div>
-            <p className=" text-white ml-[30%]">Forgot Passwprd</p>
-          </div>
-          <button
-            onClick={handleLogin}
-            // onClick={push}
-            className="bg-[#ffffff] text-[#10204B] my-[15%] ml-[35%] font-medium rounded-[20px] py-2 px-8 "
-          >
-            Sign In
-          </button>
-        </form>
-      </div>
-    </>
+          don't have an Account? Register
+        </Button>
+      </Stack>
+      {error && (
+        <Typography variant="body1" color="error" fontWeight="bold">
+          {error}
+        </Typography>
+      )}
+    </Stack>
   );
 }
