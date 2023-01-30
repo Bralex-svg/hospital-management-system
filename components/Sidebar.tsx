@@ -52,15 +52,6 @@ export default function Sidebar() {
               <ul className="pt-2 pb-4 space-y-1 text-sm">
                 <li className="rounded-sm">
                   <Link
-                    href="/Patients/medicalInfo"
-                    className="flex items-center p-2 space-x-3 rounded-md"
-                  >
-                    <AiOutlineIdcard className="text-white text-2xl" />
-                    <span className="text-gray-100">Out Patient Dept</span>
-                  </Link>
-                </li>
-                <li className="rounded-sm">
-                  <Link
                     href="/Patients/newPatient"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
