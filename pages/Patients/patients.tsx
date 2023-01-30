@@ -19,7 +19,7 @@ import { CustomIconButton, CustomTableCell, SearchInput } from "../../shared";
 import { AddMedicalInfoModal, TableTemplate } from "../../views";
 import AddPatientModal from "../../views/AddPatientModal";
 
-export default function patients() {
+export default function Patients() {
   const { user } = useAppSelector((state) => state.UserReducer);
   const [addPatient, setAddPatient] = useState<boolean>(false);
   const [addMedical, setAddMedical] = useState<boolean>(false);
