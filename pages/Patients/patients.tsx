@@ -58,7 +58,7 @@ export default function patients() {
       />
       {patient && (
         <ManagePatientModal
-          open={true}
+          open={Boolean(patient)}
           handleClose={() => setPatient(null)}
           patient={patient}
         />
