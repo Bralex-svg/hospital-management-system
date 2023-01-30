@@ -34,6 +34,7 @@ export default function Login() {
               flex={1}
               justifyContent="center"
               overflow="hidden"
+              marginTop="-20px"
             >
               <Typography
                 color={(theme) => theme.palette.common.white}

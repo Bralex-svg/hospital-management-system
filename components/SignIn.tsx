@@ -46,7 +46,7 @@ export default function SignIn() {
     <Stack
       alignItems="center"
       justifyContent="cente"
-      marginTop="-50px"
+      marginTop="-290px"
       width="100%"
       height="100%"
       spacing={2}
@@ -58,7 +58,7 @@ export default function SignIn() {
         borderRadius={(theme) => theme.spacing(0.5)}
         bgcolor={(theme) => theme.palette.background.paper}
         spacing={1.5}
-        minHeight="200px"
+        minHeight="100px"
       >
         <InputGroup
           handleChange={(e) => setInfo({ ...info, username: e.target.value })}

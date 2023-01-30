@@ -10,7 +10,7 @@ export default function Banner() {
           <Image
             className="h-[40rem]"
             width="1500"
-            height="1100"
+            height="900"
             src={Back}
             alt=""
           />

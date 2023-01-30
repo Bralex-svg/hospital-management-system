@@ -23,7 +23,7 @@ export default function ProfileMenu({ anchorEl, handleClose }: IProps) {
 
   return (
     <Menu anchorEl={anchorEl} onClose={handleClose} open={Boolean(anchorEl)}>
-      {!patient && (
+      {(!patient || !patient.token) && (
         <MenuItem
           onClick={() => {
             router.push("/auth/patient/login");

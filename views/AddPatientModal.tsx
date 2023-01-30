@@ -14,12 +14,19 @@ import { CustomDatePicker } from "../shared";
 import Typography from "@mui/material/Typography";
 import { IoMdClose } from "react-icons/io";
 import MenuItem from "@mui/material/MenuItem";
-import { CreatePatientDto } from "../models/PatientModel";
+import PatientModel, { CreatePatientDto } from "../models/PatientModel";
 import GenderData from "../data/Gender";
 import { Gender } from "../enum/Gender";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { PatientThunk } from "../functions";
 import ApiRoutes from "../routes/ApiRoutes";
+import {
+  errorResponse,
+  pendingResponse,
+  successResponse,
+} from "../features/ResponseReducer";
+import controller from "../controller";
+import ResponseModel from "../models/ResponseModel";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -46,15 +53,19 @@ export default function AddPatientModal({ open, handleClose }: IProps) {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.UserReducer);
   const { message } = useAppSelector((state) => state.ResponseReducer);
-  function handleAddPatient() {
-    dispatch(
-      PatientThunk({
+  async function handleAddPatient() {
+    try {
+      dispatch(pendingResponse());
+      const res = await controller<ResponseModel<PatientModel>>({
         data: info,
         url: ApiRoutes.patient.add,
         token: user?.token,
         method: "post",
-      })
-    );
+      });
+      dispatch(successResponse(res.message));
+    } catch (error) {
+      dispatch(errorResponse(error));
+    }
   }
   return (
     <Dialog

@@ -49,7 +49,7 @@ export default function SignIn() {
     <Stack
       alignItems="center"
       justifyContent="cente"
-      marginTop="-50px"
+      marginTop="-350px"
       width="100%"
       height="100%"
       spacing={2}
