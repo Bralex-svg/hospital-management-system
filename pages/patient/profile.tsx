@@ -12,7 +12,7 @@ import { CustomIconButton, CustomTableCell, NoDataView } from "../../shared";
 import { TableTemplate, ViewMedicalDetailsModal } from "../../views";
 import { FcReading } from "react-icons/fc";
 import RecordModel from "../../models/RecordModel";
-export default function profile() {
+export default function Profile() {
   const dispatch = useAppDispatch();
   const { patient } = useAppSelector((state) => state.PatientReducer);
   const { records } = useAppSelector((state) => state.RecordReducer);
