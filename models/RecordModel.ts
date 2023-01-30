@@ -23,3 +23,8 @@ export interface MedicalStatement {
   id: string;
   title: string;
 }
+
+export interface RecordRequestModel {
+  date: string;
+  recordId: string;
+}

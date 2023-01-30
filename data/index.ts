@@ -13,3 +13,8 @@ export const UserTypesData: IUserType[] = [
   { title: "Casual", value: "casual" },
   { title: "Others", value: "others" },
 ];
+
+export const RecordPermissionTypes: { title: string; value: string }[] = [
+  { title: "Single", value: "single" },
+  { title: "All", value: "all" },
+];

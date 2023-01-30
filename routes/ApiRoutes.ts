@@ -6,9 +6,11 @@ export default {
     register: "auth/register",
     authenticate: "auth/authenticate",
     users: "auth/users",
+    allUsers: "auth/users/all",
     updateRole: "auth/user/role",
     updateUserType: "auth/user/type",
     patientLogin: "auth/patient/login",
+    patientProfile: (patientId: string) => `auth/patient/profile/${patientId}`,
     patientAuthenticate: "auth/patient/authenticate",
   },
   patient: {
@@ -31,5 +33,7 @@ export default {
     update: (recordId: string) => `record/${recordId}`,
     patientRecord: (patientId: string) => `record/patient/${patientId}`,
     active: (patientId: string) => `record/active/${patientId}`,
+    requestRecords: (patientId: string) => `record/request/${patientId}`,
+    userRecords: (userId: string) => `record/user/accessible/${userId}`,
   },
 };

@@ -28,3 +28,13 @@ export const MedicalRecordsTableHeader: ITableCell[] = [
   { children: "MedicalReports" },
   { children: "More" },
 ];
+
+export const MedicalRecordsPermissionHeader: ITableCell[] = [
+  { children: "No." },
+  { children: "Permission Type" },
+  { children: "Record Id" },
+  { children: "Status" },
+  { children: "User" },
+  { children: "UserType" },
+  { children: "More" },
+];

@@ -14,12 +14,19 @@ import Sidebar from "../../components/Sidebar";
 import Colors from "../../constants/Colors";
 import { PatientTableHeader } from "../../data/TableHeaders";
 import { PatientsThunk } from "../../functions";
+import PatientModel from "../../models/PatientModel";
 import ApiRoutes from "../../routes/ApiRoutes";
 import { CustomIconButton, CustomTableCell, SearchInput } from "../../shared";
-import { AddMedicalInfoModal, TableTemplate } from "../../views";
+import {
+  AddMedicalInfoModal,
+  ManagePatientModal,
+  TableTemplate,
+} from "../../views";
 import AddPatientModal from "../../views/AddPatientModal";
 
 export default function Admin() {
+  const [patient, setPatient] = useState<PatientModel | null>(null);
+
   const { user } = useAppSelector((state) => state.UserReducer);
   const [addPatient, setAddPatient] = useState<boolean>(false);
   const [addMedical, setAddMedical] = useState<boolean>(false);
@@ -46,6 +53,13 @@ export default function Admin() {
         handleClose={() => setAddPatient(false)}
         open={addPatient}
       />{" "}
+      {patient && (
+        <ManagePatientModal
+          open={Boolean(patient)}
+          handleClose={() => setPatient(null)}
+          patient={patient}
+        />
+      )}
       <Stack direction="row">
         <Stack width="240px">
           <Sidebar />
@@ -95,7 +109,12 @@ export default function Admin() {
                     {dayjs(p.createdAt).format("DD/MM/YYYY")}
                   </CustomTableCell>
                   <CustomTableCell>
-                    <IconButton size="small">
+                    <IconButton
+                      onClick={() => {
+                        setPatient(p);
+                      }}
+                      size="small"
+                    >
                       <MdOutlineMoreVert />
                     </IconButton>
                   </CustomTableCell>
