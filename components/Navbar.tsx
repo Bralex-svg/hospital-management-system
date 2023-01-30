@@ -12,6 +12,7 @@ import { MdOutlineHealthAndSafety } from "react-icons/md";
 export default function Navbar() {
   const { user } = useAppSelector((state) => state.UserReducer);
   const router = useRouter();
+  const { patient } = useAppSelector((state) => state.PatientReducer);
   const [profile, setProfile] = useState<HTMLElement | null>(null);
   const [patientMenu, setPatientMenu] = useState<HTMLElement | null>(null);
   const [nav, setNav] = useState(false);
@@ -27,11 +28,15 @@ export default function Navbar() {
       variant="outlined"
       position="fixed"
     >
-      <ProfileMenu anchorEl={profile} handleClose={() => setProfile(null)} />
-      <PatientProfileMenu
-        anchorEl={patientMenu}
-        handleClose={() => setPatientMenu(null)}
-      />
+      {!patient && (
+        <ProfileMenu anchorEl={profile} handleClose={() => setProfile(null)} />
+      )}
+      {!user && (
+        <PatientProfileMenu
+          anchorEl={patientMenu}
+          handleClose={() => setPatientMenu(null)}
+        />
+      )}
       <Toolbar>
         <Stack
           direction="row"
