@@ -1,42 +1,75 @@
-import { Divider, IconButton, Stack, TableRow } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
-import { BiRefresh } from "react-icons/bi";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { PrimaryShades } from "../../constants/Colors";
-import { MedicalRecordsTableHeader } from "../../data/TableHeaders";
-import { RecordsThunk } from "../../functions";
-import ApiRoutes from "../../routes/ApiRoutes";
-import { CustomIconButton, CustomTableCell, NoDataView } from "../../shared";
 import {
-  PatientSidebar,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+  TableRow,
+} from "@mui/material";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { BiRefresh, BiUserPlus } from "react-icons/bi";
+import { FcReading } from "react-icons/fc";
+import { MdOutlineMoreVert, MdPlaylistAdd } from "react-icons/md";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import Sidebar from "../../components/Sidebar";
+import Colors from "../../constants/Colors";
+import controller from "../../controller";
+import {
+  MedicalRecordsTableHeader,
+  PatientTableHeader,
+} from "../../data/TableHeaders";
+import {
+  errorResponse,
+  pendingResponse,
+  successResponse,
+} from "../../features/ResponseReducer";
+import { PatientsThunk } from "../../functions";
+import PatientModel from "../../models/PatientModel";
+import RecordModel from "../../models/RecordModel";
+import ResponseModel from "../../models/ResponseModel";
+import ApiRoutes from "../../routes/ApiRoutes";
+import {
+  CustomIconButton,
+  CustomTableCell,
+  NoDataView,
+  SearchInput,
+} from "../../shared";
+import {
+  AddMedicalInfoModal,
+  ManagePatientModal,
   TableTemplate,
   ViewMedicalDetailsModal,
 } from "../../views";
-import { FcReading } from "react-icons/fc";
-import RecordModel from "../../models/RecordModel";
-export default function Profile() {
-  const dispatch = useAppDispatch();
-  const { patient } = useAppSelector((state) => state.PatientReducer);
-  const { records } = useAppSelector((state) => state.RecordReducer);
+import AddPatientModal from "../../views/AddPatientModal";
+
+export default function MedicalRecords() {
+  const { user } = useAppSelector((state) => state.UserReducer);
+  const [records, setRecords] = useState<RecordModel[]>([]);
   const [medicalFile, setMedicalFile] = useState<RecordModel | null>(null);
 
-  function getRecords() {
-    dispatch(
-      RecordsThunk({
-        token: patient?.token,
+  const dispatch = useAppDispatch();
+
+  async function handleRecords() {
+    try {
+      dispatch(pendingResponse());
+      const res = await controller<ResponseModel<RecordModel[]>>({
+        token: user?.token,
         method: "get",
-        url: ApiRoutes.record.patientRecord(patient ? patient.patientId : ""),
-      })
-    );
+        url: ApiRoutes.record.userRecords(user ? user.userId : ""),
+      });
+      setRecords(res.data);
+      dispatch(successResponse(res.message));
+    } catch (error) {
+      dispatch(errorResponse(error));
+    }
   }
 
   useEffect(() => {
-    getRecords();
+    handleRecords();
   }, []);
+
   return (
-    <Stack width="100%" height="100%">
+    <Stack height="100vh" width="100%" overflow="hidden">
       {medicalFile && (
         <ViewMedicalDetailsModal
           record={medicalFile}
@@ -45,24 +78,24 @@ export default function Profile() {
         />
       )}
       <Stack direction="row">
-        <PatientSidebar />
-        <Stack width="100%">
+        <Stack width="240px">
+          <Sidebar />
+        </Stack>
+        <Stack height="100%" width="100%">
           <Stack
             direction="row"
-            width="100$"
+            width="100%"
             alignItems="center"
             justifyContent="flex-end"
+            spacing={1.5}
             padding={1}
           >
-            <Typography variant="body1" color="primary">
-              Medical History
-            </Typography>
-            <Stack flex={1} />
             <CustomIconButton
-              handleClick={getRecords}
+              handleClick={handleRecords}
               Icon={BiRefresh}
               title="Refresh"
             />
+            <Stack flex={1} />
           </Stack>
           <Divider />
           <Stack padding={2}>

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("react-toastify/dist/ReactToastify.css");
 
 .loader {
   width: 48px;

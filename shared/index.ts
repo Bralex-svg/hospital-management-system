@@ -9,3 +9,4 @@ export { default as PatientInfoCard } from "./PatientInfoCard";
 export { default as UserRolesMenu } from "./UserRolesMenu";
 export { default as UserTypesMenu } from "./UserTypeMenu";
 export { default as PatientProfileMenu } from "./PatientProfileMenu";
+export { default as SidebarLink } from "./SidebarLink";
