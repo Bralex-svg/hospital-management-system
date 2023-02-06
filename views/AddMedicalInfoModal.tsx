@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import { IconButton, Stack, Typography } from "@mui/material";
+import { Checkbox, IconButton, Stack, Typography } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { PrimaryButton } from "../components";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
@@ -50,6 +50,8 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
     userType: "",
     id: "",
     title: "",
+    paid: false,
+    medicalCost: 0,
   });
   const { user } = useAppSelector((state) => state.UserReducer);
   const dispatch = useAppDispatch();
@@ -107,7 +109,34 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
       userType: "",
       id: "",
       title: "",
+      paid: false,
+      medicalCost: 0,
     });
+  }
+
+  function handleUpdatePaymentStatus(recordId: string, paid: boolean) {
+    dispatch(
+      RecordThunk({
+        data: {
+          statements: record.statements.map((rs) => {
+            if (rs.id === recordId) {
+              return {
+                ...rs,
+                paid,
+              };
+            } else {
+              return rs;
+            }
+          }),
+          patientId: patient?.patientId,
+          status: record.status,
+          duration: record.duration,
+        },
+        method: "put",
+        url: ApiRoutes.record.update(record.recordId),
+        token: user?.token,
+      })
+    );
   }
 
   function handleGetPatientRecord() {
@@ -256,6 +285,55 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
                       })
                     }
                   />
+
+                  <Stack
+                    alignItems="center"
+                    justifyContent="center"
+                    spacing={1}
+                    direction="row"
+                    width="100%"
+                  >
+                    <InputGroup
+                      props={{
+                        fullWidth: true,
+                        size: "small",
+                        sx: (theme) => ({
+                          flex: 1,
+                        }),
+                        value:
+                          info.medicalCost !== 0
+                            ? info.medicalCost.toString()
+                            : "",
+                        type: "number",
+                      }}
+                      label="Medical Charge"
+                      placeholder="enter medical charge"
+                      handleChange={(e) => {
+                        if (!isNaN(parseFloat(e.target.value))) {
+                          setInfo({
+                            ...info,
+                            medicalCost: parseFloat(e.target.value),
+                          });
+                        }
+                      }}
+                    />
+                    <Stack
+                      alignItems="center"
+                      justifyContent="flex-start"
+                      direction="row"
+                      spacing={1}
+                      sx={(theme) => ({
+                        flex: 1,
+                        paddingTop: "15px",
+                      })}
+                    >
+                      <Checkbox
+                        checked={info.paid}
+                        onChange={() => setInfo({ ...info, paid: !info.paid })}
+                      />
+                      <Typography variant="caption">Paid</Typography>
+                    </Stack>
+                  </Stack>
                 </Stack>
 
                 <PrimaryButton
@@ -285,7 +363,13 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
               {record &&
                 record.statements.length > 0 &&
                 record.statements.map((statement) => (
-                  <MedicalInfoCard key={statement.id} info={statement} />
+                  <MedicalInfoCard
+                    handlePaymentUpdate={() =>
+                      handleUpdatePaymentStatus(statement.id, !statement.paid)
+                    }
+                    key={statement.id}
+                    info={statement}
+                  />
                 ))}
               {!record && <NoDataView text="No Medical Details" />}
             </Stack>

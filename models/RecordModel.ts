@@ -22,6 +22,8 @@ export interface MedicalStatement {
   suggestionsAndConclusions: string;
   id: string;
   title: string;
+  medicalCost: number;
+  paid: boolean;
 }
 
 export interface RecordRequestModel {

@@ -1,11 +1,16 @@
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
+import { BsCheck2Circle } from "react-icons/bs";
+import { useAppSelector } from "../app/hooks";
+import { currency } from "../constants";
 import { MedicalStatement } from "../models/RecordModel";
 
 interface IProps {
   info: MedicalStatement;
+  handlePaymentUpdate: () => void;
 }
-export default function MedicalInfoCard({ info }: IProps) {
+export default function MedicalInfoCard({ info, handlePaymentUpdate }: IProps) {
+  const { user } = useAppSelector((state) => state.UserReducer);
   return (
     <Stack>
       <Typography variant="body1">
@@ -37,10 +42,38 @@ export default function MedicalInfoCard({ info }: IProps) {
           {info.suggestionsAndConclusions}
         </Typography>
         <Divider />
-        <Stack direction="row" padding={0.5} width="100%">
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          padding={0.5}
+          width="100%"
+        >
           <Typography color="secondary" variant="body2">
-            {info.userType}
+            {info.userType.toUpperCase()}
           </Typography>
+          <Stack direction="row" alignItems="center" justifyContent="center">
+            <small style={{ marginRight: "8px" }}>charge:</small>
+            <Typography
+              color={info.paid ? "green" : "error"}
+              variant="caption"
+              sx={(theme) => ({
+                marginTop: "5px",
+              })}
+            >
+              {`${currency}${info.medicalCost}`}
+            </Typography>
+
+            {!info.paid && user.userId === info.userId && (
+              <IconButton
+                onClick={handlePaymentUpdate}
+                color="primary"
+                size="small"
+              >
+                <BsCheck2Circle />
+              </IconButton>
+            )}
+          </Stack>
         </Stack>
       </Stack>
     </Stack>
