@@ -10,8 +10,8 @@ export interface IController {
   params?: any;
 }
 
-// export const baseUrl: string = "http://localhost:2222/";
-export const baseUrl: string = "https://hmstan-api.herokuapp.com/";
+export const baseUrl: string = "http://localhost:2222/";
+// export const baseUrl: string = "https://hmstan-api.herokuapp.com/";
 
 export default function <T>({
   data,

@@ -1,9 +1,10 @@
 import ISidebarLink from "../interface/ISidebarLink";
 import { IoAccessibilityOutline } from "react-icons/io5";
-import { BiMessageEdit } from "react-icons/bi";
+import { BiMessage, BiMessageEdit } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
 import NavigationRoutes from "../routes/NavigationRoutes";
 import { AiOutlineProfile } from "react-icons/ai";
+import {FaUserAlt} from "react-icons/fa"
 
 export default (): ISidebarLink[] => [
   {
@@ -26,4 +27,8 @@ export default (): ISidebarLink[] => [
     Icon: BiMessageEdit,
     route: NavigationRoutes.patientProfile.editInfo,
   },
+
+
+   
+           
 ];

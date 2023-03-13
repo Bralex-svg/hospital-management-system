@@ -42,7 +42,7 @@ export default function Sidebar() {
                     </Link>
                   </li>
                 )}
-                <li className="rounded-sm">
+                {/* <li className="rounded-sm">
                   <Link
                     href="/Pharmacy/newPharmacy"
                     className="flex items-center p-2 space-x-3 rounded-md"
@@ -50,7 +50,7 @@ export default function Sidebar() {
                     <MdLocalPharmacy className="text-white text-2xl" />
                     <span className="text-gray-100">Pharmacy</span>
                   </Link>
-                </li>
+                </li> */}
 
                 <li className="rounded-sm">
                   <a
