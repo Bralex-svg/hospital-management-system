@@ -4,9 +4,13 @@ import { BiMessage, BiMessageEdit } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
 import NavigationRoutes from "../routes/NavigationRoutes";
 import { AiOutlineProfile } from "react-icons/ai";
-import {FaUserAlt} from "react-icons/fa"
 
 export default (): ISidebarLink[] => [
+  {
+    title: "Users",
+    Icon: CiUser,
+    route: NavigationRoutes.patientProfile.users,
+  },
   {
     title: "Medical Records",
     Icon: AiOutlineProfile,

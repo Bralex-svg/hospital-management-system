@@ -4,6 +4,7 @@ export default {
     recordsPermission: "/patient/permissions",
     profileDetails: "/patient/details",
     editInfo: "/patient/info/edit",
+    users: "/patient/users",
   },
   auth: {
     userLogin: "/auth/login",
