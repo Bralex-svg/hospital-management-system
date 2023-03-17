@@ -12,7 +12,15 @@ import { IoMdClose } from "react-icons/io";
 import { PrimaryButton } from "../components";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import InputGroup from "../components/InputGroup";
+
 import Divider from "@mui/material/Divider";
+import { useRouter } from "next/router";
+
+import { Menu, MenuItem } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from "@mui/material/NativeSelect";
+import InputLabel from "@mui/material/InputLabel";
+import Box from "@mui/material/Box";
 import {
   MedicalInfoCard,
   NoDataView,
@@ -317,6 +325,30 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
                         }
                       }}
                     />
+                    <InputGroup
+                      props={{
+                        fullWidth: true,
+                        size: "small",
+                        sx: (theme) => ({
+                          flex: 1,
+                        }),
+                        value:
+                          info.medicalCost !== 0
+                            ? info.medicalCost.toString()
+                            : "",
+                        type: "number",
+                      }}
+                      label="Amount Paid"
+                      placeholder="enter amount paid"
+                      handleChange={(e) => {
+                        if (!isNaN(parseFloat(e.target.value))) {
+                          setInfo({
+                            ...info,
+                            medicalCost: parseFloat(e.target.value),
+                          });
+                        }
+                      }}
+                    />
                     <Stack
                       alignItems="center"
                       justifyContent="flex-start"
@@ -335,6 +367,26 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
                     </Stack>
                   </Stack>
                 </Stack>
+                <Box sx={{ minWidth: 50 }}>
+                  <FormControl fullWidth>
+                    <InputLabel
+                      variant="standard"
+                      htmlFor="uncontrolled-native"
+                    >
+                      Issue
+                    </InputLabel>
+                    <NativeSelect
+                      defaultValue={30}
+                      inputProps={{
+                        name: "age",
+                        id: "uncontrolled-native",
+                      }}
+                    >
+                      <option value={10}>Yes</option>
+                      <option value={20}>No</option>
+                    </NativeSelect>
+                  </FormControl>
+                </Box>
 
                 <PrimaryButton
                   handleClick={handleAddMedicalInfo}

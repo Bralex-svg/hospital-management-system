@@ -4,6 +4,7 @@ import { BiMessage, BiMessageEdit } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
 import NavigationRoutes from "../routes/NavigationRoutes";
 import { AiOutlineProfile } from "react-icons/ai";
+import { CiUser } from "react-icons/ci";
 
 export default (): ISidebarLink[] => [
   {
