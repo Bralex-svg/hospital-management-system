@@ -11,6 +11,7 @@ import {
   Button,
   IconButton,
   InputAdornment,
+  MenuItem,
   Paper,
   Stack,
   Typography,
@@ -29,6 +30,7 @@ export default function SignIn() {
     email: "",
     firstName: "",
     lastName: "",
+    userType: "",
   });
 
   async function handleRegister() {
@@ -55,13 +57,20 @@ export default function SignIn() {
       spacing={2}
     >
       <Stack
-        width="500px"
+        width="600px"
         padding={4}
-        boxShadow={(theme) => `5px 5px 5px ${theme.palette.action.hover}`}
+        boxShadow={(theme) =>
+          `5px 5px 5px ${theme.palette.action.disabledBackground}`
+        }
         borderRadius={(theme) => theme.spacing(0.5)}
         bgcolor={(theme) => theme.palette.background.paper}
         spacing={1.5}
         minHeight="200px"
+        sx={(theme) => ({
+          [theme.breakpoints.down("sm")]: {
+            width: "80%",
+          },
+        })}
       >
         <InputGroup
           props={{ name: "firstname", type: "text" }}
@@ -109,6 +118,29 @@ export default function SignIn() {
             },
           }}
         />
+        <InputGroup
+          handleChange={(e) => setInfo({ ...info, userType: e.target.value })}
+          label="User Type"
+          props={{ select: true }}
+        >
+          {[
+            "Doctor",
+            "Nurse",
+            "Pharmacist",
+            "Accountant",
+            "LabTechnician",
+            "Cleaner",
+            "Electrician",
+            "Designer",
+            "Physician",
+            "Others",
+          ].map((userType) => (
+            <MenuItem value={userType} key={userType}>
+              {userType}
+            </MenuItem>
+          ))}
+        </InputGroup>
+
         <PrimaryButton title="Sign Up" handleClick={handleRegister} />
 
         <Button

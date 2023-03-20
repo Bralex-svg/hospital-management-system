@@ -118,30 +118,12 @@ export default function users() {
                     </CustomTableCell>
                     <CustomTableCell>
                       <Stack alignItems="center" direction="row">
-                        {u.userType}
-                        {/* <IconButton
-                          onClick={(e) => {
-                            setUserInfo(u);
-                            setUserType(e.currentTarget);
-                          }}
-                          size="small"
-                        >
-                          <MdOutlineExpandMore />
-                        </IconButton> */}
+                        {u.userType.toUpperCase()}
                       </Stack>
                     </CustomTableCell>
                     <CustomTableCell>
                       <Stack alignItems="center" direction="row">
-                        {u.role}
-                        {/* <IconButton
-                          onClick={(e) => {
-                            setUserInfo(u);
-                            setRole(e.currentTarget);
-                          }}
-                          size="small"
-                        >
-                          <MdOutlineExpandMore />
-                        </IconButton> */}
+                        {u.role.toUpperCase()}
                       </Stack>
                     </CustomTableCell>
                   </TableRow>

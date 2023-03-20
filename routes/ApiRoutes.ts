@@ -29,6 +29,7 @@ export default {
   record: {
     add: "record",
     getAll: "record",
+    updateStatement: (path: string) => `record/statement/update/${path}`,
     delete: (patientId: string) => `record/${patientId}`,
     update: (recordId: string) => `record/${recordId}`,
     patientRecord: (patientId: string) => `record/patient/${patientId}`,

@@ -66,6 +66,7 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
   const [patientId, setPatientId] = useState<string>("");
   function handleAddMedicalInfo() {
     if (record) {
+      info.id = generateId();
       dispatch(
         RecordThunk({
           data: {
@@ -75,7 +76,6 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
                 ...info,
                 userId: user?.userId,
                 userType: user?.userType,
-                id: generateId,
               },
             ],
             patientId: patient?.patientId,
@@ -88,6 +88,7 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
         })
       );
     } else {
+      info.id = generateId();
       dispatch(
         RecordThunk({
           data: {
@@ -96,7 +97,6 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
                 ...info,
                 userId: user?.userId,
                 userType: user?.userType,
-                id: generateId,
               },
             ],
             patientId: patient?.patientId,
@@ -419,6 +419,9 @@ export default function AddMedicalInfoModal({ handleClose, open }: IProps) {
                     handlePaymentUpdate={() =>
                       handleUpdatePaymentStatus(statement.id, !statement.paid)
                     }
+                    patientId={patientId}
+                    recordId={record.recordId}
+                    isEdit
                     key={statement.id}
                     info={statement}
                   />
