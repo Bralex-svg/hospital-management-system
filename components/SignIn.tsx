@@ -86,7 +86,7 @@ export default function SignIn() {
           }}
         />
         <PrimaryButton title="Sign In" handleClick={handleLogin} />
-        <Button
+        {/* <Button
           onClick={() => router.push("/auth/signup")}
           style={{ textTransform: "none" }}
           variant="outlined"
@@ -95,7 +95,7 @@ export default function SignIn() {
           color="primary"
         >
           don't have an Account? Register
-        </Button>
+        </Button> */}
       </Stack>
       {error && (
         <Typography variant="body1" color="error" fontWeight="bold">
