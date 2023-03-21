@@ -54,8 +54,9 @@ export default function AddPatientModal({ open, handleClose }: IProps) {
   async function handleRegister() {
     try {
       dispatch(pendingResponse());
+      info.password = info.phoneNumber;
       const res = await controller<ResponseModel<UserModel>>({
-        data: { ...info, password: info.phoneNumber },
+        data: info,
         url: ApiRoutes.auth.register,
         method: "post",
       });
