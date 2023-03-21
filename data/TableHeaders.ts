@@ -26,6 +26,7 @@ export const MedicalRecordsTableHeader: ITableCell[] = [
   { children: "DateCreated" },
   { children: "ServiceDuration" },
   { children: "MedicalReports" },
+  { children: "Status" },
   { children: "More" },
 ];
 

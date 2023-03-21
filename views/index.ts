@@ -6,3 +6,4 @@ export { default as ViewMedicalDetailsModal } from "./ViewMedicalRecordDetailsMo
 export { default as PatientSidebar } from "./PatientSidebar";
 export { default as ManagePatientModal } from "./ManagePatientModal";
 export { default as ReviewPermissionModal } from "./ReviewPermissions";
+export { default as CustomIconButton } from "./CustomIconButton";

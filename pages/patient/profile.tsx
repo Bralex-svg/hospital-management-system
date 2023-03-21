@@ -6,10 +6,11 @@ import { BiRefresh } from "react-icons/bi";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { PrimaryShades } from "../../constants/Colors";
 import { MedicalRecordsTableHeader } from "../../data/TableHeaders";
-import { RecordsThunk } from "../../functions";
+import { RecordsThunk, RecordThunk } from "../../functions";
 import ApiRoutes from "../../routes/ApiRoutes";
-import { CustomIconButton, CustomTableCell, NoDataView } from "../../shared";
+import { CustomTableCell, NoDataView } from "../../shared";
 import {
+  CustomIconButton,
   PatientSidebar,
   TableTemplate,
   ViewMedicalDetailsModal,
@@ -62,6 +63,7 @@ export default function Profile() {
               handleClick={getRecords}
               Icon={BiRefresh}
               title="Refresh"
+              variant="outlined"
             />
           </Stack>
           <Divider />
@@ -78,6 +80,24 @@ export default function Profile() {
                       </CustomTableCell>
                       <CustomTableCell>{r.duration}</CustomTableCell>
                       <CustomTableCell>{r.statements.length}</CustomTableCell>
+                      <CustomTableCell>
+                        <CustomIconButton
+                          handleClick={() =>
+                            dispatch(
+                              RecordThunk({
+                                url: `record/patient/${r.patientId}/${
+                                  r.recordId
+                                }/${r.status === "open" ? "closed" : "open"}`,
+                                method: "put",
+                                token: patient?.token,
+                              })
+                            )
+                          }
+                          title={r.status === "open" ? "Close" : "Open"}
+                          variant="outlined"
+                          size="xsmall"
+                        />
+                      </CustomTableCell>
                       <CustomTableCell>
                         <IconButton
                           onClick={() => {

@@ -255,7 +255,7 @@ export default function MedicalInfoCard({
                 {`${currency}${info.medicalCost}`}
               </Typography>
 
-              {!info.paid && user.userId === info.userId && (
+              {!info.paid && user && user.userId === info.userId && (
                 <IconButton
                   onClick={handlePaymentUpdate}
                   color="primary"
