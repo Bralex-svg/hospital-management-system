@@ -31,6 +31,7 @@ import {
 } from "../../shared";
 import { AddMedicalInfoModal, AddUserModal, TableTemplate } from "../../views";
 import AddPatientModal from "../../views/AddPatientModal";
+import { HiOutlineUserAdd } from "react-icons/hi";
 
 export default function Admin() {
   const { user, users } = useAppSelector((state) => state.UserReducer);
@@ -38,6 +39,7 @@ export default function Admin() {
   const [userType, setUserType] = useState<HTMLElement | null>(null);
   const dispatch = useAppDispatch();
   const [userInfo, setUserInfo] = useState<UserModel | null>(null);
+  const [addUser, setAddUser] = useState<boolean>(false);
 
   function handleGetUsers() {
     dispatch(
@@ -71,6 +73,7 @@ export default function Admin() {
           handleClose={() => setRole(null)}
         />
       )}
+      <AddUserModal open={addUser} handleClose={() => setAddUser(false)} />
       <Stack direction="row">
         <Stack width="240px">
           <Sidebar />
@@ -90,6 +93,12 @@ export default function Admin() {
               title="Refresh"
             />
             <Stack flex={1} />
+
+            <CustomIconButton
+              handleClick={() => setAddUser(true)}
+              title="Add User"
+              Icon={HiOutlineUserAdd}
+            />
             <SearchInput />
           </Stack>
           <Divider />

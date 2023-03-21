@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import InputGroup from "../components/InputGroup";
-import { IconButton, Stack } from "@mui/material";
+import { IconButton, InputAdornment, Stack } from "@mui/material";
 import { PrimaryButton } from "../components";
 import { CustomDatePicker } from "../shared";
 import Typography from "@mui/material/Typography";
@@ -20,6 +20,14 @@ import { Gender } from "../enum/Gender";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { PatientThunk } from "../functions";
 import ApiRoutes from "../routes/ApiRoutes";
+import controller from "../controller";
+import ResponseModel from "../models/ResponseModel";
+import UserModel, { CreateUserDto } from "../models/UserModel";
+import {
+  errorResponse,
+  pendingResponse,
+  successResponse,
+} from "../features/ResponseReducer";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -34,14 +42,28 @@ interface IProps {
   open: boolean;
 }
 export default function AddPatientModal({ open, handleClose }: IProps) {
-  const [info, setInfo] = useState<CreatePatientDto>({
+  const { error } = useAppSelector((state) => state.ResponseReducer);
+  const [info, setInfo] = useState<CreateUserDto>({
+    phoneNumber: "",
+    password: "",
+    email: "",
     firstName: "",
     lastName: "",
-    contact: "",
-    gender: Gender.Male,
-    address: "",
-    dateOfBirth: "",
+    userType: "",
   });
+  async function handleRegister() {
+    try {
+      dispatch(pendingResponse());
+      const res = await controller<ResponseModel<UserModel>>({
+        data: { ...info, password: info.phoneNumber },
+        url: ApiRoutes.auth.register,
+        method: "post",
+      });
+      dispatch(successResponse(res.message));
+    } catch (error) {
+      dispatch(errorResponse(error));
+    }
+  }
 
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.UserReducer);
@@ -79,54 +101,86 @@ export default function AddPatientModal({ open, handleClose }: IProps) {
         </Stack>
       </DialogTitle>
       <DialogContent dividers>
-        <Stack spacing={1}>
-          <InputGroup
-            handleChange={(e) =>
-              setInfo({ ...info, firstName: e.target.value })
+        <Stack alignItems="center" justifyContent="center" spacing={2}>
+          <Stack
+            width="600px"
+            padding={4}
+            boxShadow={(theme) =>
+              `5px 5px 5px ${theme.palette.action.disabledBackground}`
             }
-            label="First Name"
-            placeholder="enter fistname"
-            props={{ value: info.firstName }}
-          />
-          <InputGroup
-            handleChange={(e) => setInfo({ ...info, lastName: e.target.value })}
-            label="Last Name"
-            placeholder="enter last name"
-            props={{ value: info.lastName }}
-          />
-          <InputGroup
-            label="PhoneNumber"
-            placeholder="contact or phone number"
-            handleChange={(e) => setInfo({ ...info, contact: e.target.value })}
-            props={{ value: info.contact }}
-          />
-          <InputGroup
-            handleChange={(e) => setInfo({ ...info, address: e.target.value })}
-            label="Address"
-            placeholder="enter address"
-            props={{ value: info.address }}
-          />
-
-          <InputGroup
-            label="Gender"
-            placeholder="select gender"
-            props={{ value: info.gender, select: true }}
-            handleChange={(e) =>
-              setInfo({ ...info, gender: e.target.value as Gender })
-            }
+            borderRadius={(theme) => theme.spacing(0.5)}
+            bgcolor={(theme) => theme.palette.background.paper}
+            spacing={1.5}
+            minHeight="200px"
+            sx={(theme) => ({
+              [theme.breakpoints.down("sm")]: {
+                width: "80%",
+              },
+            })}
           >
-            {GenderData.map((gender) => (
-              <MenuItem key={gender.value} value={gender.value}>
-                {gender.title}
-              </MenuItem>
-            ))}
-          </InputGroup>
+            <InputGroup
+              props={{ name: "firstname", type: "text" }}
+              label="FirstName"
+              placeholder="enter fistname"
+              handleChange={(e) =>
+                setInfo({ ...info, firstName: e.target.value })
+              }
+            />
+            <InputGroup
+              placeholder="enter lastname"
+              props={{ name: "lastname", type: "text", autoComplete: "off" }}
+              label="LastName"
+              handleChange={(e) =>
+                setInfo({ ...info, lastName: e.target.value })
+              }
+            />
+            <InputGroup
+              label="Email"
+              props={{ name: "email", type: "email" }}
+              placeholder="enter email address"
+              handleChange={(e) => setInfo({ ...info, email: e.target.value })}
+            />
+            <InputGroup
+              handleChange={(e) =>
+                setInfo({ ...info, phoneNumber: e.target.value })
+              }
+              label="PhoneNumber"
+              placeholder="enter phone number"
+              props={{ type: "tel" }}
+            />
 
-          <Stack />
-          <CustomDatePicker
-            handleChange={(e) => setInfo({ ...info, dateOfBirth: e })}
-            placeholder="Date Of Birth"
-          />
+            <InputGroup
+              handleChange={(e) =>
+                setInfo({ ...info, userType: e.target.value })
+              }
+              label="User Type"
+              props={{ select: true }}
+            >
+              {[
+                "Doctor",
+                "Nurse",
+                "Pharmacist",
+                "Accountant",
+                "LabTechnician",
+                "Cleaner",
+                "Electrician",
+                "Designer",
+                "Physician",
+                "Others",
+              ].map((userType) => (
+                <MenuItem value={userType} key={userType}>
+                  {userType}
+                </MenuItem>
+              ))}
+            </InputGroup>
+
+            <PrimaryButton title="Sign Up" handleClick={handleRegister} />
+          </Stack>
+          {error && (
+            <Typography variant="body1" color="error" fontWeight="bold">
+              {error}
+            </Typography>
+          )}
         </Stack>
         {message && (
           <Typography

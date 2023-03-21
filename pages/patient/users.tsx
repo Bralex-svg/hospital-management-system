@@ -44,7 +44,6 @@ export default function users() {
   const dispatch = useAppDispatch();
   const { patient } = useAppSelector((state) => state.PatientReducer);
   const [userInfo, setUserInfo] = useState<UserModel | null>(null);
-
   function handleGetUsers() {
     dispatch(
       UsersThunk({
@@ -94,6 +93,7 @@ export default function users() {
               title="Refresh"
             />
             <Stack flex={1} />
+
             <SearchInput />
           </Stack>
           <Divider />
