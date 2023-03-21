@@ -194,11 +194,6 @@ export default function AddPatientModal({ open, handleClose }: IProps) {
           </Typography>
         )}
       </DialogContent>
-      <DialogActions>
-        <Stack padding={2}>
-          <PrimaryButton handleClick={handleAddPatient} title="Save Patient" />
-        </Stack>
-      </DialogActions>
     </Dialog>
   );
 }
